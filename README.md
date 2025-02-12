@@ -143,7 +143,7 @@ This project is licensed under the **MIT License**.
 For any questions or collaboration inquiries:
 
 - Email: [rainakirtan27@example.com](rainakirtan27@example.com)
-- LinkedIn: [Kirtan Raina](https://linkedin.com/in/kirtanraina)
+- LinkedIn: [Kirtan Raina](https://www.linkedin.com/in/kirtan-raina-026021248/)
 - GitHub: [kirshiv](https://github.com/kirshiv)
 
 Happy Coding! 🚀
