@@ -18,6 +18,7 @@ const CourseTable = () => {
   const { data, isLoading, error } = useGetPublishedCourseQuery();
   const navigate = useNavigate();
   const courses = data?.courses || [];
+
   
   if (isLoading) return <h1>Loading...</h1>;
 

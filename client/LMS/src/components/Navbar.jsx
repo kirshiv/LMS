@@ -45,10 +45,11 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto hidden md:flex justify-between items-center gap-20 h-full">
         <div className="flex items-center gap-2">
           <School size={"30"} />
-          
+          <Link to="/">
             <h1 className="hidden md:block font-extrabold text-2xl">
               E-Learning
             </h1>
+          </Link>
         </div>
         {/* User icons and dark mode icon  */}
         <div className="flex items-center gap-8">
@@ -69,11 +70,9 @@ const Navbar = () => {
                 <DropdownMenuGroup>
                   <DropdownMenuItem>
                     <Link to="my-learning">My learning</Link>
-                    
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <Link to="profile">  Edit Profile</Link>
-                
+                    <Link to="profile"> Edit Profile</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={logoutHandler}>
                     Log out
@@ -82,17 +81,17 @@ const Navbar = () => {
                 {user?.role === "instructor" && (
                   <>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>Dashboard</DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <Link to="/admin/dashboard">Dashboard</Link>
+                    </DropdownMenuItem>
                   </>
                 )}
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
             <div className="flex items-center gap-2">
-              <Button onClick={()=>navigate("/login")}>
-                Login
-              </Button>
-              <Button onClick={()=>navigate("/login")}>Signup</Button>
+              <Button onClick={() => navigate("/login")}>Login</Button>
+              <Button onClick={() => navigate("/login")}>Signup</Button>
             </div>
           )}
           <DarkMode />
@@ -101,7 +100,7 @@ const Navbar = () => {
       {/* Mobile device  */}
       <div className="flex md:hidden items-center justify-between px-4 h-full">
         <h1 className="font-extrabold text-2xl">E-learning</h1>
-        <MobileNavbar/>
+        <MobileNavbar />
       </div>
     </div>
   );

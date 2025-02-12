@@ -1,9 +1,13 @@
 import React from 'react'
 import Course from './Course';
+import { useLoadUserQuery } from '@/features/api/authAPI';
 
 const MyLearning = () => {
-  const isLoading = false;
-  const myLearning = [1, 1];
+  const { data, isLoading } = useLoadUserQuery();
+  const myLearning = data?.user.enrolledCourses || [];
+  console.log(data);
+  
+
   return (
     <div className="max-w-4xl mx-auto my-10 px-4 md:px-0 ">
       <h1 className="font-bold text-2xl"> MY LEARNING</h1>

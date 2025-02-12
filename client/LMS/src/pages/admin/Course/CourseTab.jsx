@@ -18,7 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useGetCourseQuery, useGetUpdateCourseMutation } from "@/features/api/courseAPI";
+import { useGetCourseQuery, useGetUpdateCourseMutation, usePublishCourseMutation } from "@/features/api/courseAPI";
 import { Loader2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -27,7 +27,8 @@ import { toast } from "sonner";
 const CourseTab = () => {
   const params = useParams();
   const courseId = params.courseId;
-  const { data: getCourseData, isSuccess: courseIsSuccess } = useGetCourseQuery (courseId);
+  const { data: getCourseData, isSuccess: courseIsSuccess,refetch } = useGetCourseQuery(courseId);
+  const [publishCourse,{ }] = usePublishCourseMutation();
   const [input, setInput] = useState({
     courseTitle: "",
     subTitle: "",
@@ -101,7 +102,17 @@ const CourseTab = () => {
       toast.error(error.data.message || "Failed to update course");
     }
   }, [isSuccess, error]);
-
+  const handlePublishData = async (action) => {
+   try {
+      const response = await publishCourse({courseId, query:action});
+      if(response.data){
+        refetch();
+        toast.success(response.data.message);
+      }
+    } catch (error) {
+      toast.error("Failed to publish or unpublish course");
+    }
+  }
  
   return (
     <Card>
@@ -113,8 +124,8 @@ const CourseTab = () => {
           </CardDescription>
         </div>
         <div className="space-x-2">
-          <Button variant="outline">
-             "Unpublished"
+          <Button disabled={getCourseData?.course.lectures.length===0} variant="outline" onClick={()=>handlePublishData(getCourseData?.course.isPublished ? "false" : "true")}>
+            {getCourseData?.course.isPublished ? "Unpublish" : "Publish"}
           </Button>
           <Button>Remove Course</Button>
         </div>
