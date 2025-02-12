@@ -24,7 +24,7 @@ const Login = () => {
     name: "",
     email: "",
     password: "",
-    role: "", // Role selection
+    role: "", 
   });
   const [loginInput, setLoginInput] = useState({ email: "", password: "" });
 
